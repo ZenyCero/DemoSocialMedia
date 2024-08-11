@@ -22,9 +22,13 @@ public class JwtProvider {
     private int EXPIRATION;
 
     /**
-     * Metodo para generar el JWT
-    * @param userDetails: del cual se extrae el username y authorities
-    * @return JWT como {@code String} el token incluye los datos del usuario y el tiempo de expiracion
+     * Genera un JSON Web Token (JWT) utilizando los detalles del usuario proporcionado.
+     *
+     * Este método crea un JWT que incluye el nombre de usuario, los roles del usuario,
+     * y los timestamps de emisión y expiración del token.
+     *
+     * @param userDetails el objeto que contiene los detalles del usuario, incluyendo el nombre de usuario y las autoridades (roles).
+     * @return un {@code String} que representa el JWT generado, el cual incluye la información del usuario y el tiempo de expiración.
      */
     public String generateToken(UserDetails userDetails){
         return Jwts.builder()
@@ -37,8 +41,11 @@ public class JwtProvider {
     }
 
     /**
-     * Metodo para generar una llave para el JWT encriptacion
-     * @return a {@link Key} que sera usado por HMAC-SHA256 para firmar el JWT
+     * Genera una clave secreta para firmar el JWT.
+     *
+     * Esta clave es utilizada para el algoritmo HMAC-SHA256 para asegurar la integridad y autenticidad del token.
+     *
+     * @return un {@link Key} que será utilizado para firmar y verificar el JWT usando el algoritmo HMAC-SHA256.
      */
     private Key getSignKey(){
         byte[] keyByte = Decoders.BASE64.decode(SECRET);
@@ -46,8 +53,12 @@ public class JwtProvider {
     }
 
     /**
-     * Metodo para validar el JWT
-     * @param token: se extrae el token para la validacion
+     * Valida el JWT proporcionado.
+     *
+     * Este método verifica la validez del token utilizando la clave secreta para asegurarse de que el token
+     * no ha sido manipulado y que es auténtico. Si el token no es válido, se lanzará una excepción.
+     *
+     * @param token un objeto {@link TokenDTO} que contiene el JWT a validar.
      */
     public void validateToken(TokenDTO token){
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token.getToken());
