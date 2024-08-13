@@ -1,11 +1,13 @@
 package org.zerocool.securityservice.security.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 import org.zerocool.securityservice.security.dto.TokenDTO;
 
 import java.security.Key;
@@ -13,6 +15,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+@Service
 public class JwtProvider {
 
     @Value("${jwt.secret}")
@@ -58,9 +61,18 @@ public class JwtProvider {
      * Este método verifica la validez del token utilizando la clave secreta para asegurarse de que el token
      * no ha sido manipulado y que es auténtico. Si el token no es válido, se lanzará una excepción.
      *
-     * @param token un objeto {@link TokenDTO} que contiene el JWT a validar.
+     * @param token: un objeto {@link TokenDTO} que contiene el JWT a validar.
      */
     public void validateToken(TokenDTO token){
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token.getToken());
+    }
+
+    /**
+     * Metodo que extrae las claims de un JWT
+     * @param token
+     * @return {@link Claims} obtenidas del token
+     */
+    public Claims getClaims(String token){
+        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
     }
 }
