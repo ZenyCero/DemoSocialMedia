@@ -4,20 +4,18 @@ spring:
   r2dbc:
     pool:
       enabled: true
-    password: zenycero
-    url: r2dbc:postgresql://localhost:5432/twitterClone
-    username: zenycero
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    url: r2dbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
   jpa:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
 
-server:
-  port: 8095
+#server:
+#  port: 8095
 
 jwt:
   expiration: 15
   secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
-
-
