@@ -37,7 +37,7 @@ public class UserService implements UserRepositoryPort {
                 .findByUsernameOrEmail(userDTO.getUsername(), userDTO.getUsername()).hasElement();
 
         return existsUser
-                .flatMap(exists -> exists
+                .flatMap(exists -> Boolean.TRUE.equals(exists)
                         ? Mono.error(new CustomException("User already exits", HttpStatus.BAD_REQUEST))
                         : userRepository.save(user))
                 .thenReturn("User saved success");
