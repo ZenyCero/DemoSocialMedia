@@ -26,6 +26,10 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
      */
     @Override
     public Mono<SecurityContext> load(ServerWebExchange exchange) {
+        String path = exchange.getRequest().getPath().value();
+        if (path.contains("auth")){
+            return Mono.empty();
+        }
         String token = exchange.getAttribute("roles");
         return jwtAuthenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(token,token))

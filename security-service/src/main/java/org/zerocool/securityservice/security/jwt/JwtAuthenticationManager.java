@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.zerocool.securityservice.expection.CustomException;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
