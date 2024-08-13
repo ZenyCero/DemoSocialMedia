@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.config;
+package org.zerocool.securityservice.domain.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

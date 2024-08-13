@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.jwt;
+package org.zerocool.securityservice.domain.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,7 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.zerocool.securityservice.security.dto.TokenDTO;
+import org.zerocool.securityservice.domain.dto.TokenDTO;
 
 import java.security.Key;
 import java.time.Instant;

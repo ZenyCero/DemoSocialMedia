@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.jwt;
+package org.zerocool.securityservice.domain.jwt;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
-import org.zerocool.securityservice.expection.CustomException;
+import org.zerocool.securityservice.common.exception.CustomException;
 import reactor.core.publisher.Mono;
 
 @Component

@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.config;
+package org.zerocool.securityservice.domain.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;

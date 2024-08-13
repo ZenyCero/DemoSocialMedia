@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.jwt;
+package org.zerocool.securityservice.domain.jwt;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.zerocool.securityservice.expection.CustomException;
+import org.zerocool.securityservice.common.exception.CustomException;
 import reactor.core.publisher.Mono;
 
 import java.util.List;

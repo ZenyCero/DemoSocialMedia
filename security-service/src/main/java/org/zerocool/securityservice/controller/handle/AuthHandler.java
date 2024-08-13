@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.handle;
+package org.zerocool.securityservice.controller.handle;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.zerocool.securityservice.adapter.dto.LoginDTO;
 import org.zerocool.securityservice.adapter.dto.UserDTO;
 import org.zerocool.securityservice.adapter.port.in.UserPort;
 import org.zerocool.securityservice.adapter.port.out.UserRepositoryPort;
-import org.zerocool.securityservice.security.dto.TokenDTO;
+import org.zerocool.securityservice.domain.dto.TokenDTO;
 import reactor.core.publisher.Mono;
 
 @Component

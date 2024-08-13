@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.dto;
+package org.zerocool.securityservice.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

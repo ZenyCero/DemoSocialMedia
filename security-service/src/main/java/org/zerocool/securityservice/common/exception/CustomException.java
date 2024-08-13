@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.expection;
+package org.zerocool.securityservice.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

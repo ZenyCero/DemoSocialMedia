@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.config;
+package org.zerocool.securityservice.domain.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.zerocool.securityservice.security.jwt.JwtFilter;
-import org.zerocool.securityservice.security.repository.SecurityContextRepository;
+import org.zerocool.securityservice.domain.jwt.JwtFilter;
+import org.zerocool.securityservice.domain.repository.SecurityContextRepository;
 
 @Configuration
 @EnableWebFluxSecurity

@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.config;
+package org.zerocool.securityservice.common.config;
 
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;

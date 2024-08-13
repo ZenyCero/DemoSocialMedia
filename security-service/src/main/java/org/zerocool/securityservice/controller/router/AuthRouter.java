@@ -1,11 +1,11 @@
-package org.zerocool.securityservice.router;
+package org.zerocool.securityservice.controller.router;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.zerocool.securityservice.handle.AuthHandler;
+import org.zerocool.securityservice.controller.handle.AuthHandler;
 
 @Configuration
 public class AuthRouter {

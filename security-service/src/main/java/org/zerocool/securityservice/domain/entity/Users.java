@@ -1,4 +1,4 @@
-package org.zerocool.securityservice.security.entity;
+package org.zerocool.securityservice.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
