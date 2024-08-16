@@ -42,31 +42,10 @@ public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
      * @return Un objeto `UsernamePasswordAuthenticationToken` que representa la autenticación del usuario con el
      * nombre de usuario y las autoridades (roles) extraídos de las reclamaciones.
      */
-    public Authentication createAuthenticationToken(Claims claims){
+    private Authentication createAuthenticationToken(Claims claims){
         String username = claims.getSubject();
-        List<SimpleGrantedAuthority> authorities = this.extractAuthorities(claims);
+        List<SimpleGrantedAuthority> authorities = jwtProvider.getRoles(claims);
 
         return new UsernamePasswordAuthenticationToken(username, null, authorities);
-    }
-
-    /**
-     * Metodo utilizado para extraer los roles de las claims
-     * @param claims
-     * @return Una lista de `SimpleGrantedAuthority` que representa los roles extraídos del objeto `Claims`. Si no
-     * se encuentran roles en las reclamaciones, se retorna una lista vacía.
-     */
-    public List<SimpleGrantedAuthority> extractAuthorities(Claims claims){
-        Object objectAuth = claims.get("roles");
-
-        if (objectAuth instanceof List<?>){
-            @SuppressWarnings("unchecked")
-            List<Map<String,String>> roles = (List<Map<String, String>>) objectAuth;
-
-            return roles.stream()
-                    .map(role -> role.get("authority"))
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
-        }
-        return List.of();
     }
 }
