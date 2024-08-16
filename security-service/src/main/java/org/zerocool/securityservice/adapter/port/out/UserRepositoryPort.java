@@ -8,5 +8,6 @@ import reactor.core.publisher.Mono;
 public interface UserRepositoryPort {
     Mono<String> registry(UserDTO userDTO);
     Mono<TokenDTO> login(LoginDTO userDTO);
+    Mono<TokenDTO> refreshToken(TokenDTO tokenDTO);
 
 }

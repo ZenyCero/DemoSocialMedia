@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 public interface UserPort {
     Mono<ServerResponse> login(ServerRequest request);
     Mono<ServerResponse> registry(ServerRequest request);
+    Mono<ServerResponse> refreshToken(ServerRequest request);
 }

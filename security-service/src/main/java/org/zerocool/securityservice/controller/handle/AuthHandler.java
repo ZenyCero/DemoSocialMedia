@@ -41,4 +41,14 @@ public class AuthHandler implements UserPort {
                         .body(userRepositoryPort.registry(dto), String.class)
                 );
     }
+
+    @Override
+    public Mono<ServerResponse> refreshToken(ServerRequest request) {
+        Mono<TokenDTO> token = request.bodyToMono(TokenDTO.class).doOnNext(objectValidator::validate);
+        return token
+                .flatMap(dto -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(userRepositoryPort.refreshToken(dto), TokenDTO.class)
+                );
+    }
 }
