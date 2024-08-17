@@ -1,5 +1,6 @@
 package org.zerocool.securityservice.domain.jwt;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -11,8 +12,10 @@ import org.zerocool.securityservice.common.exception.CustomException;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFilter implements WebFilter {
 
+    private final JwtProvider jwtProvider;
     /**
      * Filtra las solicitudes HTTP para manejar la autenticación de tokens.
      *
@@ -41,6 +44,9 @@ public class JwtFilter implements WebFilter {
             return Mono.error(new CustomException("Invalid token", HttpStatus.BAD_REQUEST));
 
         String token = auth.replace("Bearer ", "");
+
+        jwtProvider.validateToken(token);
+
         exchange.getAttributes().put("token", token);
         return chain.filter(exchange);
     }
