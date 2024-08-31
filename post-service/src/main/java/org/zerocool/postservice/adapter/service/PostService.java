@@ -1,15 +1,16 @@
 package org.zerocool.postservice.adapter.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerocool.postservice.adapter.entity.Post;
-import org.zerocool.postservice.adapter.port.out.MediaRepositoryPort;
 import org.zerocool.postservice.adapter.port.out.PostRepositoryPort;
-import org.zerocool.postservice.adapter.repository.MediaRepository;
 import org.zerocool.postservice.adapter.repository.PostRepository;
 import org.zerocool.postservice.common.mapper.MapperPost;
 import org.zerocool.postservice.domain.dto.PostDTO;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -32,5 +33,11 @@ public class PostService implements PostRepositoryPort{
     @Override
     public Mono<String> delete(int id) {
         return null;
+    }
+
+    @Override
+    public Flux<Post> get(String userId, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return postRepository.findAllByUserId(Long.parseLong(userId), pageable);
     }
 }
