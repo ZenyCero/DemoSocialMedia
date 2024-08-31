@@ -16,6 +16,7 @@
 
     <modules>
         <module>security-service</module>
+        <module>post-service</module>
     </modules>
     <packaging>pom</packaging>
 

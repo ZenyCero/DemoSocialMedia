@@ -15,7 +15,7 @@ import java.util.Date;
 public class Post {
     @Id
     private Long id;
-    private Long user_id;
+    private Long userId;
     private String content;
     private Date created_at;
     private Date updated_at;

@@ -1,0 +1,37 @@
+services:
+  postgresql:
+    container_name: postgresql
+    image: postgres
+    environment:
+      POSTGRES_USER: zenycero
+      POSTGRES_PASSWORD: zenycero
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: zenycero
+      MONGO_INITDB_ROOT_PASSWORD: zenycero
+      MONGO_INITDB_DATABASE: mongodb
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
+  mongo-data:
+    driver: local
