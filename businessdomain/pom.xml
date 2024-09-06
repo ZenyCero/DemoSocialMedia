@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	
+  <modelVersion>4.0.0</modelVersion>
+  	
+  <parent>
+    <groupId>org.zerocool</groupId>
+    <artifactId>CloneTwitter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  	
+  <artifactId>businessdomain</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>businessdomain</name>
+  <description>businessdomain</description>
+  	
+  <packaging>pom</packaging>
+  	
+  <modules>
+    <module>post-service</module>
+    <module>commet-service</module>
+  </modules>
+  	
+  <properties>
+    <spring-cloud-depedencies.version>2021.0.4</spring-cloud-depedencies.version>
+    <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+  </properties>
+  	
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud-depedencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  	
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.zerocool</groupId>
+      <artifactId>shared-library</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  	
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

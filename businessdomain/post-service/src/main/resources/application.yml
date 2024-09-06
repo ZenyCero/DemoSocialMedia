@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: post-service
+  data:
+    mongodb:
+      username: zenycero
+      password: zenycero
+      authentication-database: admin
+      database: mongodb
+      host: localhost
+      port: 27017

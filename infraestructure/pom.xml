@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	
+  <modelVersion>4.0.0</modelVersion>
+  	
+  <parent>
+    		
+    <groupId>org.zerocool</groupId>
+    		
+    <artifactId>CloneTwitter</artifactId>
+    		
+    <version>1.0.0-SNAPSHOT</version>
+    	
+  </parent>
+  	
+  <artifactId>infraestructure</artifactId>
+  	
+  <version>1.0.0-SNAPSHOT</version>
+  	
+  <name>infraestructure</name>
+  	
+  <description>infraestructure</description>
+  	
+  <packaging>pom</packaging>
+  	
+  <modules>
+    		
+    <module>security-service</module>
+    	  
+    <module>shared-library</module>
+      
+  </modules>
+  	
+  <properties>
+    		
+    <java.version>17</java.version>
+    	
+  </properties>
+  	
+  <dependencies>
+
+	</dependencies>
+  	
+  <build>
+    		
+    <plugins>
+
+		</plugins>
+    	
+  </build>
+  
+</project>
