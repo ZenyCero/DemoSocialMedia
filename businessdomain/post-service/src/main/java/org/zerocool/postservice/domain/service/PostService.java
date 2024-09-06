@@ -2,13 +2,11 @@ package org.zerocool.postservice.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.mongodb.core.ReactiveMongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.zerocool.postservice.adapter.entity.CounterPost;
 import org.zerocool.postservice.adapter.entity.Post;
 import org.zerocool.postservice.adapter.port.out.PostRepositoryPort;
 import org.zerocool.postservice.adapter.repository.PostRepository;
@@ -29,18 +27,16 @@ public class PostService implements PostRepositoryPort{
     @Override
     public Mono<String> savePost(PostDTO postDTO) {
         Post post = Mapper.convertToOtherClass(postDTO, Post.class);
-        log.info("Post saved: {}", post);
         return counterPostService.getNextSequenceValue("idPost")
                 .flatMap(counter -> {
                     post.setId(counter);
                     return postRepository.save(post)
-                            .doOnSuccess(savedPost -> log.info("Post saved: {}", savedPost))
                             .thenReturn("Post saved successfully");
                 });
     }
 
     @Override
-    public Mono<String> deletePost(Long idPost) {
+    public Mono<String> deletePostByIdPost(Long idPost) {
         Mono<Boolean> exitsPost = postRepository.existsById(idPost);
         return exitsPost.flatMap(exits -> exits
                         ? postRepository.deleteById(idPost).thenReturn("Post deleted successfully")
@@ -48,8 +44,19 @@ public class PostService implements PostRepositoryPort{
     }
 
     @Override
-    public Flux<Post> getPost(Long idUser) {
-        return postRepository.findAllByIdUserOrderByUpdatedAsc(idUser)
-                .switchIfEmpty(Mono.error(new CustomException("Post not found", HttpStatus.NOT_FOUND)));
+    public Flux<Post> getPostsByIdUserPageable(Long idUser, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+
+        Flux<Post> postFlux = postRepository.findAllByIdUserOrderByUpdatedAsc(idUser, pageable);
+        Mono<Long> countMono = postRepository.countAllByIdUser(idUser);
+
+        return postFlux
+                .collectList()
+                .zipWith(countMono)
+                .map(tuple ->
+                        new SliceImpl<>
+                        (tuple.getT1(), pageable, tuple.getT2() >
+                                (pageable.getPageNumber() + 1) * pageable.getPageSize()))
+                .flatMapMany(Flux::fromIterable);
     }
 }
