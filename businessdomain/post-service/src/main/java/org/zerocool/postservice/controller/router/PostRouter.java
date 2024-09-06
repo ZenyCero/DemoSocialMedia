@@ -14,8 +14,8 @@ public class PostRouter {
     RouterFunction<ServerResponse> routerPost(PostHandler handler){
         return RouterFunctions.route()
                 .POST(PATH, handler::savePost)
-                .GET(PATH, handler::getPostsByIdUser)
-                .DELETE(PATH, handler::deletePostById)
+                .GET(PATH + "/{id}", handler::getPostsByIdUserPageable)
+                .DELETE(PATH + "/{id}", handler::deletePostByIdPost)
                 .build();
     }
 }

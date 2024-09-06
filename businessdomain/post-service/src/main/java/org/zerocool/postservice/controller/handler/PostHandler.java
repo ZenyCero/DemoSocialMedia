@@ -10,7 +10,6 @@ import org.zerocool.postservice.adapter.port.in.PostPort;
 import org.zerocool.postservice.adapter.port.out.PostRepositoryPort;
 import org.zerocool.postservice.domain.dto.PostDTO;
 import org.zerocool.sharedlibrary.validation.ObjectValidator;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -29,19 +28,19 @@ public class PostHandler implements PostPort {
     }
 
     @Override
-    public Mono<ServerResponse> getPostsByIdUser(ServerRequest request) {
-        Long idUser = Long.parseLong(request.queryParam("id").get());
-        int page = Integer.parseInt(request.queryParam("page").orElse("1"));
+    public Mono<ServerResponse> getPostsByIdUserPageable(ServerRequest request) {
+        Long idUser = Long.parseLong(request.pathVariable("id"));
+        int page = Integer.parseInt(request.queryParam("page").orElse("0"));
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(postRepositoryPort.getPost(idUser), Post.class);
+                .body(postRepositoryPort.getPostsByIdUserPageable(idUser, page), Post.class);
     }
 
     @Override
-    public Mono<ServerResponse> deletePostById(ServerRequest request) {
-        Long idPost = Long.parseLong(request.queryParam("id").get());
-        return postRepositoryPort.deletePost(idPost)
+    public Mono<ServerResponse> deletePostByIdPost(ServerRequest request) {
+        Long idPost = Long.parseLong(request.pathVariable("id"));
+        return postRepositoryPort.deletePostByIdPost(idPost)
                 .flatMap(post -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(post));
