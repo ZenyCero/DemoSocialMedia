@@ -1,0 +1,64 @@
+# Intellij IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven
+target/
+
+# Gradle
+.gradle/
+build/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Application-specific
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot DevTools
+spring-boot-devtools.properties
+*.local.properties
+
+# Environment-specific
+.env
+.env.*
+*.local
+
+# Sensitive files
+*.key
+*.pem
+*.csr
+*.crt
+*.p12
+
+# IDE-specific
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Others
+*.db
+*.sqlite
+*.lock
+*.tmp
+
+# Package and Dependency
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Exclude test directory
+test/
