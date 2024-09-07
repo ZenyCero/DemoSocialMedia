@@ -13,6 +13,6 @@ public class CommetDTO {
     private Long idPost;
     private Long idUser;
     private String content;
-    private Date created_at;
-    private Date updated_at;
+    private Date created;
+    private Date updated;
 }

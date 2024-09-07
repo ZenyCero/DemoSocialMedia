@@ -23,20 +23,17 @@ public class CommetHandler implements CommetPort {
     @Override
     public Mono<ServerResponse> getCommets(ServerRequest serverRequest) {
         Long idPost = Long.parseLong(serverRequest.pathVariable("id"));
-        if (idPost != null) {
-            return commetRepository.getAllByIdPost(idPost)
-                    .collectList()
-                    .flatMap(commet -> ServerResponse.ok()
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(commet, CommetDTO.class));
-        } else {
-            return Mono.error(new CustomException("Post not found", HttpStatus.NOT_FOUND));
-        }
+        return commetRepository.getAllByIdPost(idPost)
+                .collectList()
+                .flatMap(commet -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(commet, CommetDTO.class));
     }
 
     @Override
     public Mono<ServerResponse> saveCommet(ServerRequest serverRequest) {
-        Mono<CommetDTO> commetDTO = serverRequest.bodyToMono(CommetDTO.class).doOnNext(objectValidator::validate);
+        Mono<CommetDTO> commetDTO = serverRequest.bodyToMono(CommetDTO.class)
+                .doOnNext(objectValidator::validate);
         return commetDTO
                 .flatMap(dto -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)

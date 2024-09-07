@@ -15,6 +15,7 @@ public class CommetRouter {
     RouterFunction<ServerResponse> routerCommet(CommetHandler handler) {
         return RouterFunctions.route()
                 .GET(PATH + "/{id}", handler::getCommets)
+                .POST(PATH, handler::saveCommet)
                 .build();
     }
 }
