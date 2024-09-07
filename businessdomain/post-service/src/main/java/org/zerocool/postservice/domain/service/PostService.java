@@ -15,6 +15,7 @@ import org.zerocool.sharedlibrary.exception.CustomException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import org.zerocool.sharedlibrary.mapper.Mapper;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 @RequiredArgsConstructor
@@ -44,10 +45,10 @@ public class PostService implements PostRepositoryPort{
     }
 
     @Override
-    public Flux<Post> getPostsByIdUserPageable(Long idUser, int page) {
+    public Flux<PostDTO> getPostsByIdUserPageable(Long idUser, int page) {
         Pageable pageable = PageRequest.of(page, 10);
 
-        Flux<Post> postFlux = postRepository.findAllByIdUserOrderByUpdatedAsc(idUser, pageable);
+        Flux<Post> postFlux = postRepository.findAllByIdUserOrderByUpdatedDesc(idUser, pageable);
         Mono<Long> countMono = postRepository.countAllByIdUser(idUser);
 
         return postFlux
@@ -57,6 +58,8 @@ public class PostService implements PostRepositoryPort{
                         new SliceImpl<>
                         (tuple.getT1(), pageable, tuple.getT2() >
                                 (pageable.getPageNumber() + 1) * pageable.getPageSize()))
-                .flatMapMany(Flux::fromIterable);
+                .flatMapMany(slice -> Flux.fromIterable(slice.getContent())) // Extract posts from Slice
+                .flatMap(post -> Mono.fromCallable(() -> Mapper.convertToOtherClass(post, PostDTO.class))) // Convert each Post to PostDTO
+                .subscribeOn(Schedulers.boundedElastic());
     }
 }

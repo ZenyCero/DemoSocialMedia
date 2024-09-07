@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 public interface PostRepositoryPort {
     Mono<String> savePost(PostDTO postDTO);
     Mono<String> deletePostByIdPost(Long idPost);
-    Flux<Post> getPostsByIdUserPageable(Long idUser, int page);
+    Flux<PostDTO> getPostsByIdUserPageable(Long idUser, int page);
 }

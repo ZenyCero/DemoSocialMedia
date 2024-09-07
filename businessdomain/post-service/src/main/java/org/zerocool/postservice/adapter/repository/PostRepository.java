@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface PostRepository extends ReactiveMongoRepository<Post, Long> {
-    Flux<Post> findAllByIdUserOrderByUpdatedAsc(Long idUser, Pageable pageable);
+    Flux<Post> findAllByIdUserOrderByUpdatedDesc(Long idUser, Pageable pageable);
     Mono<Long> countAllByIdUser(Long idUser);
 }

@@ -34,7 +34,7 @@ public class PostHandler implements PostPort {
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(postRepositoryPort.getPostsByIdUserPageable(idUser, page), Post.class);
+                .body(postRepositoryPort.getPostsByIdUserPageable(idUser, page), PostDTO.class);
     }
 
     @Override
