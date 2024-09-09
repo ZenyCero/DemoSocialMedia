@@ -5,7 +5,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.zerocool.postservice.adapter.entity.Post;
 import org.zerocool.postservice.adapter.port.in.PostPort;
 import org.zerocool.postservice.adapter.port.out.PostRepositoryPort;
 import org.zerocool.postservice.domain.dto.PostDTO;
