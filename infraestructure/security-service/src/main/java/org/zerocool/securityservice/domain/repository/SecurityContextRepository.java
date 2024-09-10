@@ -1,5 +1,6 @@
 package org.zerocool.securityservice.domain.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -10,8 +11,9 @@ import org.zerocool.securityservice.domain.jwt.JwtAuthenticationManager;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class SecurityContextRepository implements ServerSecurityContextRepository {
-    private JwtAuthenticationManager jwtAuthenticationManager;
+    private final JwtAuthenticationManager jwtAuthenticationManager;
 
     @Override
     public Mono<Void> save(ServerWebExchange exchange, SecurityContext context) {
