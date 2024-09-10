@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.zerocool</groupId>
-    <artifactId>CloneTwitter</artifactId>
+    <artifactId>DemoSocialMedia</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>CloneTwitter</name>
-    <description>CloneTwitter</description>
+    <name>DemoSocialMedia</name>
+    <description>DemoSocialMedia</description>
 
     <modules>
         <module>businessdomain</module>

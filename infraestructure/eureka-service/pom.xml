@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>eureka-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>eureka-service</name>
     <description>eureka-service</description>
 

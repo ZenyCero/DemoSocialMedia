@@ -2,7 +2,7 @@
 <h3 align="center">Un apasionado de la tecnologia, cree este proyecto para poner mis habilidades a prueba y seguir afianzando mis conocimientos.</h3>
 
 <h1 align="center">El proyecto</h1>
-<h3 align="center">Demo de Red Social con arquitectura de microservicio reactivo </h3>
+<h3 align="center">Demo de Red Social con arquitectura de microservicio reactivo (status: en proceso)</h3>
 
 > Un vistazo a la arquitectura del proyecto
 
