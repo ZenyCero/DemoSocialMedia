@@ -37,7 +37,7 @@ Tener instalado las siguientes herramientas:
   * neo4j
 * ## Instalacion
 1. Clonar el repositorio:  
-git clone https://github.com/ZenyCero/TwitterClone.git
+git clone https://github.com/ZenyCero/DemoSocialMedia.git
 2. Navegar a la raiz del proyecto
 3. Compilar y empaquetar: mvn clean install
 # Servicios del proyecto
