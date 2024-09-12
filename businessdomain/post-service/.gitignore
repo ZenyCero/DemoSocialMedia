@@ -60,5 +60,3 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
-# Exclude test directory
-test/
