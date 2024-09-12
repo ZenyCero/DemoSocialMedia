@@ -28,17 +28,18 @@ public class PostHandler implements PostPort {
 
     @Override
     public Mono<ServerResponse> getPostsByIdUserPageable(ServerRequest request) {
-        Long idUser = Long.parseLong(request.pathVariable("id"));
+        String idUser = request.pathVariable("id");
         int page = Integer.parseInt(request.queryParam("page").orElse("0"));
+        int size = Integer.parseInt(request.queryParam("size").orElse("10"));
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(postRepositoryPort.getPostsByIdUserPageable(idUser, page), PostDTO.class);
+                .body(postRepositoryPort.getPostsByIdUserPageable(idUser, page, size), PostDTO.class);
     }
 
     @Override
     public Mono<ServerResponse> deletePostByIdPost(ServerRequest request) {
-        Long idPost = Long.parseLong(request.pathVariable("id"));
+        String idPost = request.pathVariable("id");
         return postRepositoryPort.deletePostByIdPost(idPost)
                 .flatMap(post -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)

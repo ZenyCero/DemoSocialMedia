@@ -18,26 +18,25 @@ import org.zerocool.sharedlibrary.mapper.Mapper;
 import reactor.core.scheduler.Schedulers;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class PostService implements PostRepositoryPort{
 
     private final PostRepository postRepository;
-    private final CounterPostService counterPostService;
+
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
 
     @Override
     public Mono<String> savePost(PostDTO postDTO) {
         Post post = Mapper.convertToOtherClass(postDTO, Post.class);
-        return counterPostService.getNextSequenceValue("idPost")
-                .flatMap(counter -> {
-                    post.setId(counter);
-                    return postRepository.save(post)
-                            .thenReturn("Post saved successfully");
-                });
+        return postRepository.save(post)
+                .thenReturn("Post saved successfully");
     }
 
     @Override
-    public Mono<String> deletePostByIdPost(Long idPost) {
+    public Mono<String> deletePostByIdPost(String idPost) {
         Mono<Boolean> exitsPost = postRepository.existsById(idPost);
         return exitsPost.flatMap(exits -> exits
                         ? postRepository.deleteById(idPost).thenReturn("Post deleted successfully")
@@ -45,8 +44,8 @@ public class PostService implements PostRepositoryPort{
     }
 
     @Override
-    public Flux<PostDTO> getPostsByIdUserPageable(Long idUser, int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+    public Flux<PostDTO> getPostsByIdUserPageable(String idUser, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
         Flux<Post> postFlux = postRepository.findAllByIdUserOrderByUpdatedDesc(idUser, pageable);
         Mono<Long> countMono = postRepository.countAllByIdUser(idUser);
