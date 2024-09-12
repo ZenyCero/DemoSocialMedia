@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PostDTO {
-    private Long idUser;
+    private String id;
+    private String idUser;
     private String content;
-    private Date created;
-    private Date updated;
+    private LocalDate created;
+    private LocalDate  updated;
 }
