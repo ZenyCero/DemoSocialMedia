@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface PostRepository extends ReactiveMongoRepository<Post, Long> {
-    Flux<Post> findAllByIdUserOrderByUpdatedDesc(Long idUser, Pageable pageable);
-    Mono<Long> countAllByIdUser(Long idUser);
+public interface PostRepository extends ReactiveMongoRepository<Post, String> {
+    Flux<Post> findAllByIdUserOrderByUpdatedDesc(String idUser, Pageable pageable);
+    Mono<Long> countAllByIdUser(String idUser);
 }
