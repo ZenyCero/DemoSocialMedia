@@ -1,17 +1,5 @@
-server:
-  port: 8081
 spring:
+  config:
+    import: optional:configserver:http://localhost:8888
   application:
     name: commet-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/mongodb
-      username: zenycero
-      password: zenycero
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/

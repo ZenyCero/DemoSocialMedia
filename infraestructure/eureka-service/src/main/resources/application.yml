@@ -1,17 +1,5 @@
-server:
-  port: 8761
-
 spring:
+  config:
+    import: optional:configserver:http://localhost:8888
   application:
     name: eureka-service
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
-
-logging.level.com.netflix.eureka: DEBUG
