@@ -19,6 +19,7 @@
   <modules>
     <module>post-service</module>
     <module>commet-service</module>
+    <module>follower-service</module>
   </modules>
   	
   <properties>

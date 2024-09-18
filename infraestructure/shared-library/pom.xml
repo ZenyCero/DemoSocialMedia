@@ -29,4 +29,22 @@
       <artifactId>spring-web</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Built-By>${user.name}</Built-By>
+              <Built-JDK>${java.version}</Built-JDK>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

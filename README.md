@@ -6,7 +6,7 @@
 
 > Un vistazo a la arquitectura del proyecto
 
-![TwitterClone.jpg](TwitterClone.jpg)
+![ArquitecturaSocialMedia.jpg](ArquitecturaSocialMedia.jpg)
 
 > Este repositorio contiene un proyecto demostrativo de una simulacion de red social en el cual he tratado de colocar todos mis conocimientos e incluyendo conocimientos que estoy 
 > aprendiendo a lo largo de este desarrollo.

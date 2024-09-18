@@ -31,8 +31,10 @@ public class PostRepositoryTest {
                 .updated(localDate)
                 .build();
         Post post = Mapper.convertToOtherClass(postDTO, Post.class);
+
         StepVerifier.create(postRepository.save(post))
                 .expectSubscription()
+                .expectNextCount(1)
                 .verifyComplete();
     }
 
@@ -50,6 +52,15 @@ public class PostRepositoryTest {
     @Order(2)
     public void deletePostById(){
         StepVerifier.create(postRepository.deleteById("1"))
+                .expectSubscription()
+                .expectNextCount(0)
+                .verifyComplete();
+    }
+
+    @Test
+    @Order(3)
+    public void deleteAll(){
+        StepVerifier.create(postRepository.deleteAll())
                 .expectSubscription()
                 .expectNextCount(0)
                 .verifyComplete();

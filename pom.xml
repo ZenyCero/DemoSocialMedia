@@ -15,8 +15,8 @@
     <description>DemoSocialMedia</description>
 
     <modules>
-        <module>businessdomain</module>
         <module>infraestructure</module>
+        <module>businessdomain</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -26,6 +26,7 @@
         <project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
         <spring-boot-version>3.3.2</spring-boot-version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -54,13 +62,30 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <!-- Tghis plugin generate reports in two differents forma .txt and xml
-                        in test phase when build life cicle is execuite -->
+                        in test phase when build life cicle is execuite
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -68,7 +93,7 @@
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!-- It is the spring-boot repackage goal that repackages the JAR produced
                         by maven to specify the main class and make it executable using an embedded container -->
             <plugin>
@@ -113,7 +138,7 @@
                                 </buildArgs>
                             </configuration>
                         </plugin> -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>4.0.0-M13</version>
@@ -126,7 +151,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.3</version>
                 <configuration> </configuration>
-            </plugin>
+            </plugin> -->
             <!-- generate project code documentation -->
             <!--   <plugin>
                             <groupId>org.apache.maven.plugins</groupId>

@@ -17,9 +17,10 @@
   <packaging>pom</packaging>
   	
   <modules>
-    <module>security-service</module>
     <module>shared-library</module>
+    <module>security-service</module>
     <module>eureka-service</module>
+    <module>config-service</module>
   </modules>
   	
   <properties>
