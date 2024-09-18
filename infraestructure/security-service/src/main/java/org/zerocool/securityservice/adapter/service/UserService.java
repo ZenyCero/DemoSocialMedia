@@ -12,11 +12,13 @@ import org.zerocool.securityservice.adapter.dto.LoginDTO;
 import org.zerocool.securityservice.adapter.dto.UserDTO;
 import org.zerocool.securityservice.adapter.port.out.UserRepositoryPort;
 import org.zerocool.securityservice.adapter.repository.UserRepository;
+import org.zerocool.securityservice.domain.dto.UserKafka;
 import org.zerocool.sharedlibrary.exception.CustomException;
 import org.zerocool.securityservice.domain.dto.TokenDTO;
 import org.zerocool.securityservice.domain.emuns.Roles;
 import org.zerocool.securityservice.domain.entity.Users;
 import org.zerocool.securityservice.domain.jwt.JwtProvider;
+import org.zerocool.sharedlibrary.mapper.Mapper;
 import reactor.core.publisher.Mono;
 
 import java.util.Date;
@@ -29,6 +31,7 @@ public class UserService implements UserRepositoryPort {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final KafkaService kafkaService;
 
     @Override
     public Mono<String> registry(UserDTO userDTO) {
@@ -46,7 +49,7 @@ public class UserService implements UserRepositoryPort {
         return existsUser
                 .flatMap(exists -> Boolean.TRUE.equals(exists)
                         ? Mono.error(new CustomException("User already exits", HttpStatus.BAD_REQUEST))
-                        : userRepository.save(user))
+                        : userRepository.save(user).doOnNext(kafkaService::publish))
                 .thenReturn("User saved success");
     }
 
